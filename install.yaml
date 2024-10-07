@@ -4,6 +4,8 @@ pre_install_actions:
 
 project_files:
   - providers/ibexa_cloud.yaml
+  - web-build/Dockerfile.ibexa_cloud
+  - config.ibexa_cloud.yaml
 
 global_files:
 dependencies:
