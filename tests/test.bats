@@ -12,9 +12,7 @@ setup() {
 }
 
 health_checks() {
-  # Do something useful here that verifies the add-on
-  # ddev exec "curl -s elasticsearch:9200" | grep "${PROJNAME}-elasticsearch"
-  ddev exec "curl -s https://localhost:443/"
+  ddev pull -y ibexa-cloud
 }
 
 teardown() {
@@ -29,7 +27,9 @@ teardown() {
   cd ${TESTDIR}
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
-  ddev restart
+  ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
+  ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
+  ddev restart >/dev/null
   health_checks
 }
 
@@ -39,6 +39,8 @@ teardown() {
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
   echo "# ddev get ddev/ddev-ibexa-cloud with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ddev/ddev-ibexa-cloud
+  ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
+  ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
   ddev restart >/dev/null
   health_checks
 }
