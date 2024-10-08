@@ -12,7 +12,7 @@ setup() {
 }
 
 health_checks() {
-  ddev pull -y ibexa-cloud
+  ddev pull ibexa-cloud -y
 }
 
 teardown() {
