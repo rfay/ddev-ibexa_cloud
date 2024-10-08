@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: base
     env:
-      - IBEXA_CLI_TOKEN: ${{ secrets.IBEXA_CLI_TOKEN }}
+      IBEXA_CLI_TOKEN: ${{ secrets.IBEXA_CLI_TOKEN }}
       # IBEXA_PROJECT and IBEXA_ENVIRONMENT are automatically inherited
     steps:
       - uses: ddev/github-action-add-on-test@v2
