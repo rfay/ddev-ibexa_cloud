@@ -1,11 +1,11 @@
 
-name: ibexa_cloud
+name: ibexa-cloud
 pre_install_actions:
 
 project_files:
-  - providers/ibexa_cloud.yaml
-  - web-build/Dockerfile.ibexa_cloud
-  - config.ibexa_cloud.yaml
+  - providers/ibexa-cloud.yaml
+  - web-build/Dockerfile.ibexa-cloud
+  - config.ibexa-cloud.yaml
 
 global_files:
 dependencies:
