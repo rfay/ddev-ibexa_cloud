@@ -1,9 +1,9 @@
 setup() {
   set -eu -o pipefail
   export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/test-addon-template
+  export TESTDIR=~/tmp/test-ibexa-cloud
   mkdir -p $TESTDIR
-  export PROJNAME=test-addon-template
+  export PROJNAME=test-ibexa-cloud
   export DDEV_NONINTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
