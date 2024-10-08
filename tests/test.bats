@@ -37,8 +37,8 @@ teardown() {
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get ddev/ddev-ibexa-cloud with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ddev/ddev-ibexa-cloud
+  echo "# ddev get rfay/ddev-ibexa-cloud with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get rfay/ddev-ibexa-cloud
   ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
   ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
   ddev restart >/dev/null
