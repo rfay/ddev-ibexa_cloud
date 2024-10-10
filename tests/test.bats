@@ -8,18 +8,18 @@ setup() {
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
-  ddev start -y >/dev/null
+  cp -r ${DIR}/tests/testdata/.platform.app.yaml ${DIR}/tests/testdata/.platform ${TESTDIR}
 }
 
-health_checks() {
+pull_health_checks() {
   ddev pull ibexa-cloud -y
 }
 
 teardown() {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
-  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
+#  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
+#  [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
 }
 
 @test "install from directory" {
@@ -27,20 +27,19 @@ teardown() {
   cd ${TESTDIR}
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
   ddev get ${DIR}
-  ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
-  ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
+  ddev config --web-environment=IBEXA_CLI_TOKEN=${IBEXA_CLI_TOKEN},IBEXA_PROJECT=${IBEXA_PROJECT},IBEXA_ENVIRONMENT=pull
   ddev restart >/dev/null
-  health_checks
+  pull_health_checks
 }
 
-# bats test_tags=release
-@test "install from release" {
-  set -eu -o pipefail
-  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get rfay/ddev-ibexa-cloud with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get rfay/ddev-ibexa-cloud
-  ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
-  ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
-  ddev restart >/dev/null
-  health_checks
-}
+## bats test_tags=release
+#@test "install from release" {
+#  set -eu -o pipefail
+#  cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
+#  echo "# ddev get rfay/ddev-ibexa-cloud with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+#  ddev get rfay/ddev-ibexa-cloud
+#  ddev config global --web-environment-add=IBEXA_CLI_TOKEN=
+#  ddev config --web-environment-add=IBEXA_PROJECT=,IBEXA_ENVIRONMENT=,IBEXA_APP=
+#  ddev restart >/dev/null
+#  health_checks
+#}

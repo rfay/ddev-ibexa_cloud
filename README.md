@@ -11,4 +11,9 @@ This add-on provides integration for Ibexa Cloud.
 5. `ddev restart`
 6. `ddev pull ibexa-cloud`
 
+## Running Automated Tests Locally
+
+* `IBEXA_CLI_TOKEN`, `IBEXA_PROJECT` and `IBEXA_ENVIRONMENT` should exist in the environment
+
+
 **Contributed and maintained by @rfay**
